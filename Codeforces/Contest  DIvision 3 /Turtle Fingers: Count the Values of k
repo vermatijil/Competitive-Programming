@@ -1,0 +1,63 @@
+You are given three positive integers a
+, b
+ and l
+ (a,b,l>0
+).
+
+It can be shown that there always exists a way to choose non-negative (i.e. ≥0
+) integers k
+, x
+, and y
+ such that l=k⋅ax⋅by
+.
+
+Your task is to find the number of distinct possible values of k
+ across all such ways.
+
+Input
+The first line contains the integer t
+ (1≤t≤104
+) — the number of test cases.
+
+The following t
+ lines contain three integers, a
+, b
+ and l
+ (2≤a,b≤100
+, 1≤l≤106
+) — description of a test case.
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+
+//this is an important observation question 
+//this is very important to understand
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        ll a, b, l;
+        cin >> a >> b >> l;
+        unordered_set<int> s;
+        for (int i = 0; i < 20; i++)
+        {
+            ll val1 = pow(a, i);
+            for (int j = 0; j < 20; j++)
+            {
+                ll val2 = val1 * pow(b, j);
+                if (l % val2 == 0)
+                    s.insert(l / val2);
+            }
+        }
+        cout << s.size();
+        cout << endl;
+    }
+    return 0;
+}
